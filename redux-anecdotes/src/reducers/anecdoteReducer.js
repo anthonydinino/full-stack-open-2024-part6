@@ -45,9 +45,7 @@ export const newAnecdote = (anecdote) => {
 export const vote = (id) => {
   return {
     type: "VOTE",
-    payload: {
-      id,
-    },
+    payload: { id },
   };
 };
 
