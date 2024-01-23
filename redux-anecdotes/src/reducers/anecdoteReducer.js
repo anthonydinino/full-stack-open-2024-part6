@@ -33,8 +33,9 @@ const anecdoteSlice = createSlice({
       };
       return state.map((a) => (a.id !== action.payload.id ? a : newAnecdote));
     },
+    //TODO: state going null for some reason
     createAnecdote(state, action) {
-      return state.push(asObject(action.payload.anecdote));
+      return state.concat(asObject(action.payload.anecdote));
     },
   },
 });
