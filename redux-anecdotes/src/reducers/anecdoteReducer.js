@@ -36,7 +36,7 @@ const anecdoteSlice = createSlice({
     },
     //TODO: state going null for some reason
     createAnecdote(state, action) {
-      return state.concat(asObject(action.payload.anecdote));
+      return state.concat(asObject(action.payload));
     },
     setAnecdotes(state, action) {
       return action.payload;
@@ -50,6 +50,13 @@ export const initialiseAnecdotes = () => {
   return async (dispatch) => {
     const anecdotes = await anecdoteService.getAll();
     dispatch(setAnecdotes(anecdotes));
+  };
+};
+
+export const newAnecdote = (content) => {
+  return async (dispatch) => {
+    await anecdoteService.createNew(content);
+    dispatch(createAnecdote(content));
   };
 };
 
