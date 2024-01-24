@@ -8,7 +8,7 @@ import {
 const AnecdoteForm = () => {
   const queryClient = useQueryClient();
   const newAnecdoteMutation = useMutation({ mutationFn: createAnecdote });
-  const dispatch = useNotificationDispatch();
+  const notificationDispatch = useNotificationDispatch();
 
   const onCreate = (event) => {
     event.preventDefault();
@@ -24,7 +24,14 @@ const AnecdoteForm = () => {
             ["anecdotes"],
             anecdotes.concat(newAnecdote)
           );
-          setNotification(dispatch, `new anecdote '${newAnecdote.content}`, 5);
+          setNotification(
+            notificationDispatch,
+            `new anecdote '${newAnecdote.content}`,
+            5
+          );
+        },
+        onError: (err) => {
+          setNotification(notificationDispatch, err.message, 5);
         },
       }
     );
